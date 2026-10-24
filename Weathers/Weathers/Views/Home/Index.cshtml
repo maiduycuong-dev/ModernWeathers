@@ -1,0 +1,201 @@
+﻿@{
+	ViewData["Title"] = "Modern Weathers";
+	Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>@ViewData["Title"]</title>
+	<link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
+	<link rel="apple-touch-icon" href="~/images/favicon.png">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500;700&family=Lato:wght@400;700&family=Outfit:wght@400;500;600&family=Quicksand:wght@400;500;700&family=Montserrat:wght@400;500;600&family=Poppins:wght@400;500;600&family=Pacifico&family=Great+Vibes&family=Nunito:wght@400;600;700&family=Oswald:wght@400;500;700&family=Dancing+Script:wght@400;700&family=Caveat:wght@400;700&family=Satisfy&family=Sacramento&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="~/css/style.css" asp-append-version="true">
+</head>
+
+<body class="theme-default">
+
+	<div class="weather-card" id="weatherCard">
+		<div class="header-container">
+			<h2 id="cardTitle">Check the Weather</h2>
+
+			<button id="settingsBtn" class="tiny-settings-btn" type="button" aria-label="Settings" aria-expanded="false" aria-controls="settingsPanel">
+				<img src="~/images/settings.svg" alt="">
+			</button>
+		</div>
+		<div id="settingsPanel" class="settings-panel hidden">
+			<div class="setting-group">
+				<h4 id="labelTheme">Background Theme</h4>
+
+				<div class="theme-options">
+					<button class="theme-btn active" data-theme="default"
+							style="background: rgba(255,255,255,.95);" title="Clean White" aria-label="Clean White" type="button"></button>
+
+					<button class="theme-btn" data-theme="blue"
+							style="background: linear-gradient(135deg,#00c6ff,#0072ff);" title="Ocean Blue" aria-label="Ocean Blue" type="button"></button>
+
+					<button class="theme-btn" data-theme="sunset"
+							style="background: linear-gradient(135deg,#f857a6,#ff5858);" title="Sunset" aria-label="Sunset" type="button"></button>
+
+					<button class="theme-btn" data-theme="emerald"
+							style="background: linear-gradient(135deg,#11998e,#38ef7d);" title="Emerald" aria-label="Emerald" type="button"></button>
+
+					<button class="theme-btn" data-theme="crimson"
+							style="background: linear-gradient(135deg,#ff416c,#ff4b2b);" title="Crimson" aria-label="Crimson" type="button"></button>
+
+					<button class="theme-btn" data-theme="purple"
+							style="background: linear-gradient(135deg,#7F00FF,#E100FF);" title="Purple" aria-label="Purple" type="button"></button>
+
+					<button class="theme-btn" data-theme="sunny"
+							style="background: linear-gradient(135deg,#f6d365,#fda085);" title="Sunny" aria-label="Sunny" type="button"></button>
+
+					<button class="theme-btn" data-theme="silver"
+							style="background: linear-gradient(135deg,#bdc3c7,#2c3e50);" title="Silver" aria-label="Silver" type="button"></button>
+
+					<button class="theme-btn" data-theme="dark"
+							style="background: #0b0b0e;" title="Dark" aria-label="Dark" type="button"></button>
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelStyle">User Interface Style</h4>
+
+				<div class="style-options">
+					<button class="style-btn active" data-style="glass">Glass</button>
+					<button class="style-btn" data-style="mica">Mica</button>
+					<button class="style-btn" data-style="material">Material</button>
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelGlass">Interface Level</h4>
+
+				<div class="glass-slider-box">
+					<input type="range" id="glassSlider" min="0" max="100" value="30">
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelCardSize">Card Size</h4>
+
+				<div class="glass-slider-box">
+					<input type="range" id="sizeSlider" min="320" max="640" value="460">
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelFont">Fonts Theme</h4>
+
+				<div class="font-options grid-fonts">
+					<button class="font-btn active" data-font="segoe">Segoe UI</button>
+					<button class="font-btn" data-font="inter">Inter</button>
+					<button class="font-btn" data-font="roboto">Roboto</button>
+					<button class="font-btn" data-font="aptos">Aptos</button>
+					<button class="font-btn" data-font="lato">Lato</button>
+					<button class="font-btn" data-font="outfit">Outfit</button>
+					<button class="font-btn" data-font="quicksand">Quicksand</button>
+					<button class="font-btn" data-font="montserrat">Montserrat</button>
+					<button class="font-btn" data-font="poppins">Poppins</button>
+					<button class="font-btn" data-font="nunito">Nunito</button>
+					<button class="font-btn" data-font="oswald">Oswald</button>
+					<button class="font-btn" data-font="pacifico">Pacifico</button>
+					<button class="font-btn" data-font="greatvibes">Great Vibes</button>
+					<button class="font-btn" data-font="dancingscript">Dancing Script</button>
+					<button class="font-btn" data-font="caveat">Caveat</button>
+					<button class="font-btn" data-font="satisfy">Satisfy</button>
+					<button class="font-btn" data-font="sacramento">Sacramento</button>
+					<button class="font-btn" data-font="helvetica">Helvetica</button>
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelUnit">Temperature Unit</h4>
+
+				<div class="unit-options">
+					<button class="unit-btn active" data-unit="C">°C</button>
+					<button class="unit-btn" data-unit="F">°F</button>
+					<button class="unit-btn" data-unit="K">K</button>
+					<button class="unit-btn" data-unit="R">°R</button>
+				</div>
+			</div>
+			<div class="setting-group">
+				<h4 id="labelLang">Languages</h4>
+
+				<div class="lang-options grid-langs">
+					<button class="lang-btn active" data-lang="en">English</button>
+					<button class="lang-btn" data-lang="vi">Tiếng Việt</button>
+					<button class="lang-btn" data-lang="zh">中文</button>
+					<button class="lang-btn" data-lang="th">ภาษาไทย</button>
+					<button class="lang-btn" data-lang="lo">ພາສາລາວ</button>
+					<button class="lang-btn" data-lang="hi">हिन्दी</button>
+					<button class="lang-btn" data-lang="id">Bahasa Indonesia</button>
+					<button class="lang-btn" data-lang="ar">العربية</button>
+					<button class="lang-btn" data-lang="es">Español</button>
+					<button class="lang-btn" data-lang="pt">Português</button>
+					<button class="lang-btn" data-lang="nl">Nederlands</button>
+					<button class="lang-btn" data-lang="da">Dansk</button>
+					<button class="lang-btn" data-lang="fr">Français</button>
+					<button class="lang-btn" data-lang="de">Deutsch</button>
+					<button class="lang-btn" data-lang="ru">Русский</button>
+					<button class="lang-btn" data-lang="ja">日本語</button>
+					<button class="lang-btn" data-lang="ko">한국어</button>
+				</div>
+			</div>
+		</div>
+		<div class="search-box">
+			<input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off" enterkeyhint="search">
+			<button id="searchBtn" type="button">Search</button>
+		</div>
+		<div class="history-trigger-box">
+			<button id="historyModalBtn" class="history-trigger-btn">Today</button>
+		</div>
+		<div id="hourSelectorBox" class="hour-selector-box hidden">
+			<div class="hour-selector-header">
+				<span id="labelHourSelect">Select Hour:</span>
+				<span id="selectedHourDisplay" class="selected-hour-badge">00:00</span>
+			</div>
+			<div id="hourGrid" class="hour-grid"></div>
+		</div>
+		<p id="loadingMsg" class="loading hidden" role="status">Loading weather data...</p>
+		<p id="errorMsg" class="error hidden" role="alert">City not found or network error!</p>
+		<div id="weatherResult" class="hidden">
+			<h3 id="cityName"></h3>
+			<span id="localTime" class="local-time"></span>
+
+			<div class="temp-box">
+				<span id="temp"></span><span class="unit" id="unitSymbol">°C</span>
+			</div>
+
+			<p id="description"></p>
+
+			<div class="details">
+				<span><span id="labelHumidity">Humidity</span>: <span id="humidity"></span>%</span>
+				<span><span id="labelWind">Wind</span>: <span id="wind"></span> km/h</span>
+				<span><span id="labelUV">UV Index</span>: <span id="uvIndex"></span></span>
+			</div>
+		</div>
+	</div>
+	<div id="historyModal" class="modal-overlay hidden">
+		<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="labelHistoryTitle">
+			<div class="modal-header">
+				<h3 id="labelHistoryTitle">Select Date</h3>
+				<button id="closeHistoryBtn" class="close-modal-btn" type="button" aria-label="Close">✕</button>
+			</div>
+
+			<div class="custom-calendar">
+				<div class="cal-nav">
+					<button id="prevMonthBtn">&#8249;</button>
+					<span id="calMonthYear"></span>
+					<button id="nextMonthBtn">&#8250;</button>
+				</div>
+
+				<div id="calWeekdaysContainer" class="cal-weekdays"></div>
+				<div id="calGrid" class="cal-grid"></div>
+
+				<div class="cal-footer">
+					<button id="calTodayBtn">Today</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="~/js/script.js" asp-append-version="true"></script>
+</body>
+</html>
